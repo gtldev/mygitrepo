@@ -1,3 +1,4 @@
 here is line1 of file 1
 here is line2 of file 1
 here is line3 of file 1
+here is new line.
