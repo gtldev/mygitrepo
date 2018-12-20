@@ -1,1 +1,1 @@
-export default () => <div>Welcome to next.js Mihir!</div>
+export default () => <div>Welcome to next.js Mihir</div>
