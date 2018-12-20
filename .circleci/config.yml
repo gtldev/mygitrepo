@@ -1,0 +1,55 @@
+version: 2.1
+
+# Jobs
+jobs:
+  install-dependencies:
+    docker:
+    - image: node:11.3.0-slim
+    working_directory: /tmp/app
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - v1-dependencies
+    - run:
+        name: Set npm token
+        command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+    - run:
+        name: Install npm dependencies
+        command: npm install
+    - persist_to_workspace:
+        root: /tmp
+        paths:
+        - app
+
+  build-instance:
+    parameters:
+      instance-name:
+        description: "The name of the instance"
+        type: string
+    docker:
+    - image: node:11.3.0-slim
+      environment:
+        INSTANCE_NAME: << parameters.instance-name >>
+    working_directory: /tmp/app
+    steps:
+    - attach_workspace:
+        at: /tmp/
+    - run:
+        name: Build for "<< parameters.instance-name >>"
+        command: npm run export -- --outdir=out/"<< parameters.instance-name >>"
+    - persist_to_workspace:
+        root: /tmp/app
+        paths:
+        - out/<< parameters.instance-name >>
+
+workflows:
+  build-test-and-deploy:
+    jobs:
+    - install-dependencies:
+        context: my-global
+    - build-instance:
+        name: my-default-build
+        instance-name: my-default
+        context: my-global
