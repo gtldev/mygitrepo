@@ -72,10 +72,12 @@ workflows:
         instance-name: my-default
         context: my-global
         requires: 
-        - install-dependencies    
+        - install-dependencies
     - deploy-instance:
-        name: my-default-build
-        instance-name: my-default
+        name: my-default-deploy
+        instance-name: my-default-deploy
+        requires:
+        - my-default-build
         context: my-global
         filters:
             branches:
