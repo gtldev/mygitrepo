@@ -57,7 +57,7 @@ jobs:
           command: aws s3 sync . s3://circleci-app/
 
 workflows:
-  build-and-deploy:
+  build-test-and-deploy:
     jobs:
     - install-dependencies:
         context: my-global
@@ -69,7 +69,6 @@ workflows:
         - install-dependencies    
     - deploy:
         requires:
-        - install-dependencies
         - build-instance
         filters:
             branches:
