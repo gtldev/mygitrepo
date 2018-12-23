@@ -50,7 +50,8 @@ workflows:
     - install-dependencies:
         context: my-global
     - build-instance:
-        requires: install-dependencies
         name: my-default-build
         instance-name: my-default
         context: my-global
+        requires: 
+        - install-dependencies        
