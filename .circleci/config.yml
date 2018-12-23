@@ -38,7 +38,7 @@ jobs:
         at: /tmp/
     - run:
         name: Build for "<< parameters.instance-name >>"
-        command: npm run export -- --outdir=out
+        command: npm run export -- --outdir=out/"<< parameters.instance-name >>"
     - persist_to_workspace:
         root: /tmp/app
         paths:
