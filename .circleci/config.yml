@@ -60,7 +60,7 @@ jobs:
           at: /tmp/
       - run:
           name: Deploy to S3
-          command: aws s3 sync out s3://circleci-app/
+          command: aws s3 sync ~/out s3://circleci-app/
 
 workflows:
   build-test-and-deploy:
