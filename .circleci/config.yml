@@ -10,7 +10,7 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v1-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+        - v1-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
         - v1-dependencies
     - run:
         name: Set npm token
@@ -50,6 +50,7 @@ workflows:
     - install-dependencies:
         context: my-global
     - build-instance:
+        requires: install-dependencies
         name: my-default-build
         instance-name: my-default
         context: my-global
