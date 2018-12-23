@@ -44,9 +44,9 @@ jobs:
         paths:
         - out/<< parameters.instance-name >>
 
-  deploy:
+  deploy-build:
     docker:
-      - image: circleci/python:2.7-jessie
+    - image: circleci/python:2.7-jessie
     working_directory: ~/out
     steps:
       - run:
@@ -67,7 +67,7 @@ workflows:
         context: my-global
         requires: 
         - install-dependencies    
-    - deploy:
+    - deploy-build:
         context: my-global
         requires:
         - build-instance
