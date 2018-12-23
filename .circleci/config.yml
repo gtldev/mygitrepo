@@ -76,9 +76,6 @@ workflows:
     - deploy-instance:
         name: my-default-build
         instance-name: my-default
-        context: my-global
         requires:
         - build-instance
-        filters:
-            branches:
-              only: master
+        context: my-global
