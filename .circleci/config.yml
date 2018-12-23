@@ -48,7 +48,7 @@ jobs:
     parameters:
       instance-name:
         description: "The name of the instance"
-          type: string
+        type: string
     docker:
     - image: circleci/python:2.7-jessie
     working_directory: /tmp/app
