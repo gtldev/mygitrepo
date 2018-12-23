@@ -44,6 +44,18 @@ jobs:
         paths:
         - out/<< parameters.instance-name >>
 
+  deploy:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/out
+    steps:
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 sync . s3://circleci-app/
+
 workflows:
   build-test-and-deploy:
     jobs:
@@ -54,4 +66,10 @@ workflows:
         instance-name: my-default
         context: my-global
         requires: 
-        - install-dependencies        
+        - install-dependencies    
+    - deploy:
+        requires:
+        - build-instance
+        filters:
+            branches:
+              only: master
