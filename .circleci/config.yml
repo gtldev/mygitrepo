@@ -19,7 +19,7 @@ jobs:
         name: Install npm dependencies
         command: npm install
     - persist_to_workspace:
-        root: /tmp
+        root: /tmp/app
         paths:
         - app
 
@@ -42,7 +42,7 @@ jobs:
     - persist_to_workspace:
         root: /tmp/app
         paths:
-        - out/<< parameters.instance-name >>
+        - out/mytestapp
 
   deploy-instance:
     parameters:
