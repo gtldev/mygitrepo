@@ -68,8 +68,6 @@ workflows:
         requires: 
         - install-dependencies    
     - deploy:
-        requires:
-        - build-instance
         filters:
             branches:
               only: master
