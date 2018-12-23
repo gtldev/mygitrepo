@@ -68,6 +68,7 @@ workflows:
         requires: 
         - install-dependencies    
     - deploy:
+        context: my-global
         requires:
         - build-instance
         filters:
