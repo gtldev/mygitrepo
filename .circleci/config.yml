@@ -76,9 +76,6 @@ workflows:
     - deploy-instance:
         name: my-default-build
         instance-name: my-default
-        requires:
-        - install-dependencies 
-        - build-instance
         context: my-global
         filters:
             branches:
