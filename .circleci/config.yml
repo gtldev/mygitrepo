@@ -19,7 +19,7 @@ jobs:
         name: Install npm dependencies
         command: npm install
     - persist_to_workspace:
-        root: /tmp/app
+        root: /tmp
         paths:
         - app
 
